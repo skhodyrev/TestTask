@@ -20,13 +20,16 @@ resource "aws_key_pair" "automation" {
   public_key = tls_private_key.ssh.public_key_openssh
 }
 
-resource "aws_instance" "app_server" {
+resource "aws_instance" "back_nginx" {
+  count         = var.back_count
   ami           = "ami-05f7491af5eef733a" //Ubuntu Server 20.04 LTS (HVM), SSD Volume Type, Free tier eligible, Frankfurt
   instance_type = "t2.micro"
-
   key_name = aws_key_pair.automation.key_name
 
   tags = {
-    Name = "ExampleAppServerInstance"
+    name    = "nginx-${count.index + 1}"
+    type    = "app"
+    project = "test-task"
   }
 }
+

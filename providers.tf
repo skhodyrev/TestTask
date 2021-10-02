@@ -1,12 +1,12 @@
 terraform {
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "3.61.0"
     }
 
     tls = {
-      source = "hashicorp/tls"
+      source  = "hashicorp/tls"
       version = "3.1.0"
     }
   }
@@ -14,7 +14,7 @@ terraform {
 
 
 provider "aws" {
-  region = "eu-central-1"
+  region     = var.aws_region
   access_key = chomp(file("aws_cli_access.key")) //Put here path to your Amazon AWS access key
   secret_key = chomp(file("aws_cli_secret.key")) //Put here path to your Amazon AWS secret key
 }
