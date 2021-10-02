@@ -6,6 +6,10 @@
 *.tfstate
 *.tfstate.*
 
+# .hcl files
+# This files can be safe ignored due to fixed provider version used
+*.hcl
+
 # Crash log files
 crash.log
 
@@ -38,3 +42,6 @@ terraform.rc
 
 ### Tokens ####
 *.token
+
+### Keys ###
+*.key
