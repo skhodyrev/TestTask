@@ -1,11 +1,11 @@
 variable "aws_region" {
   default     = "eu-central-1"
-  type        = "string"
+  type        = string
   description = "AWS region for installation"
 }
 
 variable "back_count" {
-  default        = 3
-  type           = "number"
-  desdescription = "Number of backend nginx instances"
+  default     = 3
+  type        = number
+  description = "Number of backend nginx instances"
 }
