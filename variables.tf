@@ -9,3 +9,16 @@ variable "back_count" {
   type        = number
   description = "Number of backend nginx instances"
 }
+
+variable "vpc_cidr" {
+  default     = "10.0.0.0/16"
+  type        = string
+  description = "VPC CIDR"
+
+}
+
+variable "subnet_cidr_newbits" {
+  type        = string
+  default     = 4
+  description = "The newbits value as per cidrsubnet function docs"
+}
