@@ -8,8 +8,8 @@ resource "aws_internet_gateway" "main" {
 
 resource "aws_subnet" "public" {
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = cidrsubnet(var.vpc_cidr, var.subnet_cidr_newbits, 1)
-  map_public_ip_on_launch = true
+  cidr_block              = cidrsubnet(var.vpc_cidr, var.subnet_cidr_newbits, 0)
+  map_public_ip_on_launch = true 
 
   tags = {
     Name = "public-subnet"
@@ -18,7 +18,7 @@ resource "aws_subnet" "public" {
 
 resource "aws_subnet" "private" {
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = cidrsubnet(var.vpc_cidr, var.subnet_cidr_newbits, 2)
+  cidr_block              = cidrsubnet(var.vpc_cidr, var.subnet_cidr_newbits, 1)
   map_public_ip_on_launch = true
 
   tags = {
@@ -28,7 +28,7 @@ resource "aws_subnet" "private" {
 
 # Elastic IP
 resource "aws_eip" "nat" {
-  vpc = true
+  vpc = true //Boolean if the EIP is in a VPC or not.
 }
 
 # NAT Gateways
