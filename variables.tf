@@ -19,6 +19,6 @@ variable "vpc_cidr" {
 
 variable "subnet_cidr_newbits" {
   type        = string
-  default     = 4
+  default     = 8
   description = "The newbits value as per cidrsubnet function docs"
 }
