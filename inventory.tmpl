@@ -1,0 +1,15 @@
+[bastion]
+${bastion-name} ansible_host=${bastion-ip}  # ${bastion-id}
+[bastion:vars]
+ansible_user=ubuntu
+ansible_ssh_private_key_file=bastion.pem
+
+[nginx]
+%{ for index, name in nginx-name ~}
+${name} ansible_host=${nginx-ip[index]} # ${nginx-id[index]}
+%{ endfor ~}
+
+[nginx:vars]
+ansible_user=ubuntu
+ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q ubuntu@${bastion-ip} -i bastion.pem"'
+ansible_ssh_private_key_file=nginx.pem

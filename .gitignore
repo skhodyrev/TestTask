@@ -40,6 +40,9 @@ terraform.rc
 ### Ansible ###
 *.retry
 
+### Ansible inventory###
+*.ini
+
 ### Tokens ####
 *.token
 

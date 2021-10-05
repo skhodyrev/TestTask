@@ -57,7 +57,7 @@ resource "aws_instance" "bastion" {
   }
 
   tags = {
-    Name    = "bastion"
+    Name    = "bastion-01"
     type    = "security"
     project = "test-task"
   }
