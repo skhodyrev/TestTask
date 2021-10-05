@@ -13,3 +13,8 @@ output "nginx_ips" {
   description = "bastion_ip"
   value       = [for s in aws_instance.back_nginx: format("%s Private IP: %s", s.tags["Name"], s.private_ip)]
 }
+
+output "nginx_lb_dns" {
+  value       = aws_lb.back_nginx.dns_name
+  description = "The DNS name of Nginx LB"
+}

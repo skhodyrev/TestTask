@@ -4,7 +4,7 @@ resource "aws_lb" "back_nginx" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.allow_http.id]
-  subnets            = [aws_subnet.publics[*].id]
+  subnets            = aws_subnet.publics[*].id
 
   tags = {
     Name = "back-nginx-lb"
@@ -20,7 +20,7 @@ resource "aws_lb_target_group" "back_nginx" {
 
   load_balancing_algorithm_type = "round_robin"
 
-     health_check {
+  health_check {
     interval            = 10
     path                = "/index.html"
     port                = 80
@@ -28,10 +28,9 @@ resource "aws_lb_target_group" "back_nginx" {
     timeout             = 5
     healthy_threshold   = 3
     unhealthy_threshold = 2
-  } 
+  }
 
   target_type = "instance"
-
 
   tags = {
     Name = "back-nginx-lb-tg"

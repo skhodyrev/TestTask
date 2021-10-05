@@ -1,3 +1,12 @@
+resource "aws_vpc" "main" {
+  cidr_block       = var.vpc_cidr
+  instance_tenancy = "default"
+
+  tags = {
+    Name = "main"
+  }
+}
+
 resource "aws_instance" "back_nginx" {
   count = var.back_count
 
@@ -51,14 +60,5 @@ resource "aws_instance" "bastion" {
     Name    = "bastion"
     type    = "security"
     project = "test-task"
-  }
-}
-
-resource "aws_vpc" "main" {
-  cidr_block       = var.vpc_cidr
-  instance_tenancy = "default"
-
-  tags = {
-    Name = "main"
   }
 }
