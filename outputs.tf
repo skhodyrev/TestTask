@@ -1,14 +1,15 @@
 /* output "public_connection_string" {
   description = "Copy/Paste/Enter - You are in the matrix"
-  value       = "ssh -i ${module.ssh-key.key_name}.pem ec2-user@${module.ec2.public_ip}"
-}*/
+  value       = "ssh -o ProxyCommand='ssh -i bastion.pem -W %h:%p ubuntu@${aws_instance.bastion.public_ip}' -i nginx.pem ubuntu@${aws_instance.back_nginx[*].private_ip}"
+  value = [for s in aws_instance.back_nginx: format("ssh -o ProxyCommand='ssh -i bastion.pem -W %h:%p ubuntu@%s", s.private_ip)]
+} */
 
 output "bastion_ip" {
   description = "bastion_ip"
   value       = aws_instance.bastion.public_ip
 }
 
-output "nginx_ip" {
+output "nginx_ips" {
   description = "bastion_ip"
-  value       = [for s in aws_instance.back_nginx: format("%s \n\tPublic IP: %s \n\tPrivate IP: %s", s.tags["Name"], s.public_ip, s.private_ip)]
+  value       = [for s in aws_instance.back_nginx: format("%s Private IP: %s", s.tags["Name"], s.private_ip)]
 }

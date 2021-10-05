@@ -22,3 +22,4 @@ variable "subnet_cidr_newbits" {
   default     = 8
   description = "The newbits value as per cidrsubnet function docs"
 }
+
