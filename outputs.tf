@@ -1,6 +1,6 @@
 output "public_connection_string_bastion" {
   description = "Copy/Paste/Enter - You are in the bastion"
-  value = [format("ssh -o StrictHostKeyChecking=no ubuntu@%s -i bastion.pem", aws_instance.bastion.public_ip)]
+  value       = [format("ssh -o StrictHostKeyChecking=no ubuntu@%s -i bastion.pem", aws_instance.bastion.public_ip)]
 }
 
 output "public_connection_string_nginxs" {

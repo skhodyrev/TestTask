@@ -55,4 +55,4 @@ resource "aws_lb_target_group_attachment" "targets" {
   target_group_arn = aws_lb_target_group.back_nginx.arn
   target_id        = aws_instance.back_nginx[count.index].id
   port             = 80
-} 
+}

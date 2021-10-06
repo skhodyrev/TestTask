@@ -31,7 +31,7 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_subnet" "publics" {
-  count                   = local.az_count
+  count = local.az_count
 
   vpc_id                  = aws_vpc.main.id
   cidr_block              = cidrsubnet(var.vpc_cidr, var.subnet_cidr_newbits, count.index)
