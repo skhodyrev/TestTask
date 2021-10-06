@@ -1,9 +1,18 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: Update and upgrade apt packages
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400 #One day
+
 - hosts: nginx
-  become: yes
+  become: true
   vars:
-    server_name: "{{ ansible_default_ipv4.address }}"
-    document_root: /var/www
-    app_root: html_demo_site-main
+    server_name: "{{ inventory_hostname }}"
+    html_root: /var/www/html
+    file_name: index.html
   tasks:
     - name: Update apt cache and install Nginx
       apt:
@@ -11,30 +20,11 @@
         state: latest
         update_cache: yes
 
-    - name: Copy website files to the server's document root
-      copy:
-        src: "{{ app_root }}"
-        dest: "{{ document_root }}"
-        mode: preserve
-
-    - name: Apply Nginx template
+    - name: Apply Index.html template
       template:
-        src: files/nginx.conf.j2
-        dest: /etc/nginx/sites-available/default
+        src: index.html.j2
+        dest: "{{ html_root }}/{{ file_name }}"
       notify: Restart Nginx
-
-    - name: Enable new site
-      file:
-        src: /etc/nginx/sites-available/default
-        dest: /etc/nginx/sites-enabled/default
-        state: link
-      notify: Restart Nginx
-
-    - name: Allow all access to tcp port 80
-      ufw:
-        rule: allow
-        port: '80'
-        proto: tcp
 
   handlers:
     - name: Restart Nginx

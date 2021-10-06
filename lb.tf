@@ -22,7 +22,7 @@ resource "aws_lb_target_group" "back_nginx" {
 
   health_check {
     interval            = 10
-    path                = "/index.html"
+    path                = "/index.nginx-debian.html"
     port                = 80
     protocol            = "HTTP"
     timeout             = 5

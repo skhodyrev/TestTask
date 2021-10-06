@@ -1,8 +1,14 @@
-/* output "public_connection_string" {
-  description = "Copy/Paste/Enter - You are in the matrix"
-  value       = "ssh -o ProxyCommand='ssh -i bastion.pem -W %h:%p ubuntu@${aws_instance.bastion.public_ip}' -i nginx.pem ubuntu@${aws_instance.back_nginx[*].private_ip}"
-  value = [for s in aws_instance.back_nginx: format("ssh -o ProxyCommand='ssh -i bastion.pem -W %h:%p ubuntu@%s", s.private_ip)]
-} */
+output "public_connection_string_bastion" {
+  description = "Copy/Paste/Enter - You are in the bastion"
+  value = [format("ssh -o StrictHostKeyChecking=no ubuntu@%s -i bastion.pem", aws_instance.bastion.public_ip)]
+}
+
+output "public_connection_string_nginxs" {
+  description = "Copy/Paste/Enter - You are in the nginx"
+  value = [for s in aws_instance.back_nginx :
+    format("ssh -o StrictHostKeyChecking=no -o ProxyCommand='ssh -W %%h:%%p -q ubuntu@%s -i bastion.pem' ubuntu@%s -i nginx.pem",
+  aws_instance.bastion.public_ip, s.private_ip)]
+}
 
 output "bastion_ip" {
   description = "bastion_ip"
@@ -19,17 +25,7 @@ output "nginx_lb_dns" {
   description = "The DNS name of Nginx LB"
 }
 
-### The Ansible inventory file
-resource "local_file" "AnsibleInventory" {
-  content = templatefile("inventory.tmpl",
-    {
-      bastion-name = aws_instance.bastion.tags["Name"]
-      bastion-ip   = aws_instance.bastion.public_ip,
-      bastion-id   = aws_instance.bastion.id,
-      nginx-name   = aws_instance.back_nginx[*].tags["Name"],
-      nginx-ip     = aws_instance.back_nginx[*].private_ip,
-      nginx-id     = aws_instance.back_nginx[*].id
-    }
-  )
-  filename = "inventory.ini"
+output "test_lb_request" {
+  value       = format("for i in {1..20}; do curl -s %s | grep h1; done", aws_lb.back_nginx.dns_name)
+  description = "Copy/Paste/Enter to test if LB is work correctly"
 }

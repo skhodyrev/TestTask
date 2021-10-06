@@ -5,7 +5,7 @@ variable "aws_region" {
 }
 
 variable "back_count" {
-  default     = 3
+  default     = 6
   type        = number
   description = "Number of backend nginx instances"
 }
