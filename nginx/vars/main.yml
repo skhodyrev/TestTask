@@ -1,0 +1,5 @@
+---
+# vars file for nginx
+    server_name: "{{ inventory_hostname }}"
+    html_root: /var/www/html
+    file_name: index.html

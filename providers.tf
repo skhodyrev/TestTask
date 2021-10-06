@@ -20,8 +20,8 @@ terraform {
 
 provider "aws" {
   region     = var.aws_region
-  access_key = chomp(file("aws_cli_access.key")) //Put here path to your Amazon AWS access key
-  secret_key = chomp(file("aws_cli_secret.key")) //Put here path to your Amazon AWS secret key
+  access_key = chomp(file("${var.aws_access_key}"))
+  secret_key = chomp(file("${var.aws_secret_key}"))
 }
 
 provider "tls" {

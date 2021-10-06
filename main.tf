@@ -1,12 +1,3 @@
-resource "aws_vpc" "main" {
-  cidr_block       = var.vpc_cidr
-  instance_tenancy = "default"
-
-  tags = {
-    Name = "main"
-  }
-}
-
 resource "aws_instance" "back_nginx" {
   count = var.back_count
 
@@ -80,9 +71,7 @@ resource "local_file" "AnsibleInventory" {
   depends_on = [aws_lb.back_nginx, aws_lb_listener.back_nginx, aws_instance.bastion]
 }
 
-
 resource "null_resource" "run_ansible" {
-
   triggers = {
     always_run = "${timestamp()}"
   }

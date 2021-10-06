@@ -15,7 +15,7 @@ resource "aws_key_pair" "bastion" {
   public_key = tls_private_key.bastion.public_key_openssh
 }
 
-### NGINX keys, *.pem will be copied to the Bastion host ###
+### NGINX keys, *.pem will be then copied to the Bastion host ###
 resource "tls_private_key" "nginx" {
   algorithm = "RSA"
   rsa_bits  = "4096"

@@ -12,7 +12,7 @@ It will create such components as:
 ## Requirements
 To run this scripts you will need at least this: 
 - Terraform 1.0+
-- Ansible core 2.10+
+- Ansible-core 2.10+
 - Python 3.8+
 - Jinja 2.10+
 - Git
@@ -21,7 +21,7 @@ To run this scripts you will need at least this:
 
 ## How to launch
 1. First of all, clone this repo 
-2. Then in ```varibles.tf``` fill the path to AWS keys
+2. Then in ```varibles.tf``` fill the path to your AWS keys
 3. Change number of VPC, if you need
 4. Initialize and run
     ```
@@ -33,5 +33,6 @@ To run this scripts you will need at least this:
 ## To do
  - [x] add README.MD
  - [ ] add Diagram of components
- - [ ] add Ansible roles
+ - [x] add Ansible roles
+ - [ ] modify SG to be more precise
  - [ ] add some other fancy stuff

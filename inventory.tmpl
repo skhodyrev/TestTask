@@ -15,6 +15,6 @@ ${name} ansible_host=${nginx-ip[index]} # ${nginx-id[index]}
 
 [nginx:vars]
 ansible_user=ubuntu
-ansible_ssh_common_args='-o StrictHostKeyChecking=no -o ProxyCommand="ssh -W %h:%p -q ubuntu@${bastion-ip} -i bastion.pem"'
+ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q ubuntu@${bastion-ip} -i bastion.pem -o StrictHostKeyChecking=no"'
 ansible_ssh_private_key_file=nginx.pem
 ansible_host_key_checking=false
