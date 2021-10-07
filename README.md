@@ -10,7 +10,8 @@ It will create such components as:
 - VPC, Subnets, Route tables, NAT Gateways, Security zones, etc.
 
 ## Scheme
-<img src="./images/scheme.svg" width="70%">
+
+[ ![](./images/scheme.svg) ](./images/scheme.svg)
 
 ## Requirements
 To run this scripts you will need at least this: 
