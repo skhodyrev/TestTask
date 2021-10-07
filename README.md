@@ -9,6 +9,9 @@ It will create such components as:
 - Application Load Balancer
 - VPC, Subnets, Route tables, NAT Gateways, Security zones, etc.
 
+## Scheme
+<img src="./images/scheme.svg" width="70%">
+
 ## Requirements
 To run this scripts you will need at least this: 
 - Terraform 1.0+
@@ -32,7 +35,7 @@ To run this scripts you will need at least this:
 
 ## To do
  - [x] add README.MD
- - [ ] add Diagram of components
+ - [x] add Diagram of components
  - [x] add Ansible roles
  - [ ] modify SG to be more precise
  - [ ] add some other fancy stuff
