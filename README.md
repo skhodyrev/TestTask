@@ -11,7 +11,7 @@ It will create such components as:
 
 ## Scheme
 
-[ ![](./images/scheme.svg) ](./images/scheme.svg)
+[ ![](./images/scheme.png) ](./images/scheme.png)
 
 ## Requirements
 To run this scripts you will need at least this: 
