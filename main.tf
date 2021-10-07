@@ -1,10 +1,26 @@
+// This data will find the most recent image
+data "aws_ami" "main" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["${var.ami_name}"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["${var.ami_account_number}"]
+}
 resource "aws_instance" "back_nginx" {
   count = var.back_count
 
-  ami                         = var.ami_id
+  ami                         = data.aws_ami.main.image_id
   instance_type               = var.ec2_instance_type
   key_name                    = aws_key_pair.nginx.key_name
-  subnet_id                   = aws_subnet.privates[count.index % length(data.aws_availability_zones.available.names)].id // Sequentially places Instance into AZ networks
+  subnet_id                   = aws_subnet.privates[count.index % length(data.aws_availability_zones.available.names)].id // Sequentially places Instance into separate AZ networks
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id, aws_security_group.allow_http.id, aws_security_group.allow_ping.id]
   associate_public_ip_address = false
 
@@ -16,7 +32,7 @@ resource "aws_instance" "back_nginx" {
 }
 
 resource "aws_instance" "bastion" {
-  ami                         = var.ami_id
+  ami                         = data.aws_ami.main.image_id
   instance_type               = var.ec2_instance_type
   key_name                    = aws_key_pair.bastion.key_name
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id, aws_security_group.allow_ping.id]

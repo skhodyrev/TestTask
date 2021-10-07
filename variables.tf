@@ -40,14 +40,18 @@ variable "ec2_instance_type" {
   description = "AWS EC2 instance type"
 }
 
-variable "ami_id" {
-  type        = string
-  default     = "ami-05f7491af5eef733a" //Ubuntu Server 20.04 LTS (HVM), SSD Volume Type, Free tier eligible, Frankfurt
-  description = "ID of Amazon Machine Image"
-}
-
 variable "username_ami" {
   type        = string
-  default     = "ubuntu" //Ubuntu Server 20.04 LTS default username
+  default     = "ubuntu" //Ubuntu Server default username
   description = "Default user name for given AMI"
+}
+
+variable "ami_account_number" {
+  default = "099720109477" //ubuntu
+}
+
+variable "ami_name" {
+  type        = string
+  default     = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*" //Ubuntu Server 20.04 LTS (HVM), SSD Volume Type, Free tier eligible, Frankfurt
+  description = "Name of the AMI to use"
 }
