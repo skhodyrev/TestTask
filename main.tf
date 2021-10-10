@@ -12,7 +12,7 @@ data "aws_ami" "main" {
     values = ["hvm"]
   }
 
-  owners = ["${var.ami_account_number}"]
+  owners = ["${var.ami_owner_id}"]
 }
 resource "aws_instance" "back_nginx" {
   count = var.back_count

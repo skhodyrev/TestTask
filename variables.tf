@@ -46,7 +46,7 @@ variable "username_ami" {
   description = "Default user name for given AMI"
 }
 
-variable "ami_account_number" {
+variable "ami_owner_id" {
   default = "099720109477" //Canonical Owner ID
   description = "Owner ID for given AMI"
 }
