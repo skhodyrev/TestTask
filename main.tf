@@ -38,31 +38,7 @@ resource "aws_instance" "bastion" {
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id, aws_security_group.allow_ping.id]
   subnet_id                   = aws_subnet.publics[0].id
   associate_public_ip_address = true
-
-  provisioner "file" {
-    source      = local_file.nginx_private_key.filename
-    destination = "/home/${var.username_ami}/.ssh/id_rsa"
-
-    connection {
-      type        = "ssh"
-      user        = var.username_ami
-      private_key = file("${local_file.bastion_private_key.filename}")
-      host        = self.public_ip
-    }
-  }
-
-  //chmod key 400 on EC2 instance
-  provisioner "remote-exec" {
-    inline = ["chmod 400 /home/${var.username_ami}/.ssh/id_rsa"]
-
-    connection {
-      type        = "ssh"
-      user        = var.username_ami
-      private_key = file("${local_file.bastion_private_key.filename}")
-      host        = self.public_ip
-    }
-  }
-
+ 
   tags = {
     Name    = "bastion-01"
     type    = "security"

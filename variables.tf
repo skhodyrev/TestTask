@@ -47,7 +47,7 @@ variable "username_ami" {
 }
 
 variable "ami_account_number" {
-  default = "099720109477" //ubuntu
+  default = "099720109477" //Canonical
 }
 
 variable "ami_name" {
