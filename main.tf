@@ -38,7 +38,7 @@ resource "aws_instance" "bastion" {
   vpc_security_group_ids      = [aws_security_group.allow_ssh.id, aws_security_group.allow_ping.id]
   subnet_id                   = aws_subnet.publics[0].id
   associate_public_ip_address = true
- 
+
   tags = {
     Name    = "bastion-01"
     type    = "security"
@@ -50,13 +50,15 @@ resource "aws_instance" "bastion" {
 resource "local_file" "AnsibleInventory" {
   content = templatefile("inventory.tmpl",
     {
-      bastion-name = aws_instance.bastion.tags["Name"]
-      bastion-ip   = aws_instance.bastion.public_ip,
-      bastion-id   = aws_instance.bastion.id,
-      nginx-name   = aws_instance.back_nginx[*].tags["Name"],
-      nginx-ip     = aws_instance.back_nginx[*].private_ip,
-      nginx-id     = aws_instance.back_nginx[*].id,
-      username     = var.username_ami
+      bastion-name    = aws_instance.bastion.tags["Name"]
+      bastion-ip      = aws_instance.bastion.public_ip,
+      bastion-id      = aws_instance.bastion.id,
+      nginx-name      = aws_instance.back_nginx[*].tags["Name"],
+      nginx-ip        = aws_instance.back_nginx[*].private_ip,
+      nginx-id        = aws_instance.back_nginx[*].id,
+      username        = var.username_ami,
+      ssh_nginx_key   = var.path_to_nginx_private_key,
+      ssh_bastion_key = var.path_to_bastion_private_key
     }
   )
   filename = "inventory.ini"

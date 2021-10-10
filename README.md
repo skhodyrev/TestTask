@@ -24,15 +24,22 @@ To run this scripts you will need at least this:
 - AWS Access Key file
 
 ## How to launch
-1. First of all, clone this repo 
-2. Then in ```varibles.tf``` fill the path to your AWS keys
-3. Change number of VPC, if you need
-4. Initialize and run
+1. First of all, clone this repo
+2. (Optional) Create SSH Private keys for Nginx and Bastion instance:
+    ```
+    $ openssl genrsa -out ssh_bastion.key 4096
+    $ openssl genrsa -out ssh_nginx.key 4096
+    ```  
+
+3. In ```varibles.tf``` fill the path to SSH Private keys
+4. In ```varibles.tf``` fill the path to your AWS keys
+5. Change number of VPC, if you need
+6. Initialize and run
     ```
     $ terraform init
     $ terraform apply --auto-approve
     ```
-5. Test your infrastructure, with commands printed by ```output.tf```
+7. Test your infrastructure, with commands printed by ```output.tf```
 
 ## To do
  - [x] add README.MD

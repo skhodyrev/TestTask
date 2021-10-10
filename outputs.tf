@@ -15,14 +15,22 @@ output "nginx_lb_dns" {
 
 output "public_connection_string_bastion" {
   description = "Copy/Paste/Enter - You are in the bastion"
-  value       = [format("ssh -o StrictHostKeyChecking=no ${var.username_ami}@%s -i bastion.pem", aws_instance.bastion.public_ip)]
+  value = [format("ssh -o StrictHostKeyChecking=no %s@%s -i %s",
+    var.username_ami,
+    aws_instance.bastion.public_ip,
+    var.path_to_bastion_private_key)]
 }
 
-output "public_connection_string_nginxs" {
+output "public_connection_string_nginxes" {
   description = "Copy/Paste/Enter - You are in the nginx"
   value = [for s in aws_instance.back_nginx :
-    format("ssh -o StrictHostKeyChecking=no -o ProxyCommand='ssh -W %%h:%%p -q ${var.username_ami}@%s -i bastion.pem' ${var.username_ami}@%s -i nginx.pem",
-  aws_instance.bastion.public_ip, s.private_ip)]
+    format("ssh -o StrictHostKeyChecking=no -o ProxyCommand='ssh -W %%h:%%p -q %s@%s -i %s' %s@%s -i %s",
+      var.username_ami,
+      aws_instance.bastion.public_ip,
+      var.path_to_bastion_private_key,
+      var.username_ami,
+      s.private_ip,
+      var.path_to_nginx_private_key)]
 }
 
 output "test_lb_request" {

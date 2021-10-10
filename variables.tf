@@ -47,11 +47,24 @@ variable "username_ami" {
 }
 
 variable "ami_account_number" {
-  default = "099720109477" //Canonical
+  default = "099720109477" //Canonical Owner ID
+  description = "Owner ID for given AMI"
 }
 
 variable "ami_name" {
   type        = string
   default     = "ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*" //Ubuntu Server 20.04 LTS (HVM), SSD Volume Type, Free tier eligible, Frankfurt
   description = "Name of the AMI to use"
+}
+
+variable "path_to_bastion_private_key" {
+  type        = string
+  default     = "ssh_bastion.key"
+  description = "Path to the Bastion pivate key"
+}
+
+variable "path_to_nginx_private_key" {
+  type        = string
+  default     = "ssh_nginx.key"
+  description = "Path to the Nginx pivate key"
 }
