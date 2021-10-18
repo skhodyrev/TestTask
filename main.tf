@@ -74,6 +74,6 @@ resource "null_resource" "run_ansible" {
   depends_on = [local_file.AnsibleInventory]
 
   provisioner "local-exec" {
-    command = "ansible-playbook -i inventory.ini nginx-install.yml"
+    command = "ansible-playbook nginx-install.yml"
   }
 }
