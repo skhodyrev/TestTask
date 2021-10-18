@@ -1,10 +1,11 @@
 ---
 # tasks file for common
-    - name: Update and upgrade apt packages
-      apt:
-        upgrade: no # Just to test, to accelerate deploy.
-        update_cache: yes
-        cache_valid_time: 86400 # One day
-    - name: Set a hostname
-      hostname:
-        name: "{{ inventory_hostname }}"
+- name: Update and upgrade apt packages
+  apt:
+    upgrade: false    # Just to test, to accelerate deploy.
+    update_cache: true
+    cache_valid_time: 86400   # One day
+
+- name: Set a hostname
+  hostname:
+    name: "{{ inventory_hostname }}"

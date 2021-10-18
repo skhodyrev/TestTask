@@ -5,10 +5,11 @@
     name: nginx=1.18.0-0ubuntu1.2
     state: present
     update_cache: true
+  notify: Start Nginx
 
 - name: Apply Index.html template
   template:
     src: index.html.j2
     dest: "{{ html_root }}/{{ file_name }}"
     mode: 0644
-  notify: Restart Nginx
+  notify: Reload Nginx
