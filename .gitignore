@@ -46,3 +46,4 @@ terraform.rc
 ### SSH Keys ###
 *.key
 *.pem
+id_rsa_*

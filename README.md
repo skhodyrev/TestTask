@@ -25,15 +25,15 @@ To run this scripts you will need at least this:
 
 ## How to launch
 1. First of all, clone this repo
-2. (Optional) Create SSH Private keys for Nginx and Bastion instance:
+2. (Optional) Create SSH key pairs for Nginx and Bastion instance:
     ```
-    $ openssl genrsa -out ssh_bastion.key 4096
-    $ openssl genrsa -out ssh_nginx.key 4096
+    $ ssh-keygen -t rsa -b 4096 -N "" -f id_rsa_nginx
+    $ ssh-keygen -t rsa -b 4096 -N "" -f id_rsa_bastion
     ```  
 
-3. In ```varibles.tf``` fill the path to SSH Private keys
+3. In ```varibles.tf``` fill the path to SSH Private and Public keys
 4. In ```varibles.tf``` fill the path to your AWS keys
-5. Change number of VPC, if you need
+5. Change number of VPC, if you need to
 6. Initialize and run
     ```
     $ terraform init

@@ -59,12 +59,24 @@ variable "ami_name" {
 
 variable "path_to_bastion_private_key" {
   type        = string
-  default     = "ssh_bastion.key"
-  description = "Path to the Bastion pivate key"
+  default     = "~/.ssh/id_rsa"
+  description = "Path to the Bastion private key"
+}
+
+variable "path_to_bastion_public_key" {
+  type        = string
+  default     = "~/.ssh/id_rsa.pub"
+  description = "Path to the Bastion public key"
 }
 
 variable "path_to_nginx_private_key" {
   type        = string
-  default     = "ssh_nginx.key"
-  description = "Path to the Nginx pivate key"
+  default     = "~/.ssh/id_rsa"
+  description = "Path to the Nginx private key"
+}
+
+variable "path_to_nginx_public_key" {
+  type        = string
+  default     = "~/.ssh/id_rsa.pub"
+  description = "Path to the Nginx public key"
 }
