@@ -22,13 +22,13 @@ variable "subnet_cidr_newbits" {
   description = "The newbits value as per cidrsubnet function docs"
 }
 
-variable "aws_access_key" {
+variable "path_to_aws_access_key" {
   type        = string
   default     = "aws_cli_access.key"
   description = "Path to your Amazon AWS access key"
 }
 
-variable "aws_secret_key" {
+variable "path_to_aws_secret_key" {
   type        = string
   default     = "aws_cli_secret.key"
   description = "Path to your Amazon AWS secret key"

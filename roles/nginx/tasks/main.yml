@@ -1,13 +1,14 @@
 ---
 # tasks file for nginx
-    - name: Update apt cache and install Nginx
-      apt:
-        name: nginx
-        state: latest
-        update_cache: yes
+- name: Update apt cache and install Nginx
+  apt:
+    name: nginx=1.18.0-0ubuntu1.2
+    state: present
+    update_cache: true
 
-    - name: Apply Index.html template
-      template:
-        src: index.html.j2
-        dest: "{{ html_root }}/{{ file_name }}"
-      notify: Restart Nginx
+- name: Apply Index.html template
+  template:
+    src: index.html.j2
+    dest: "{{ html_root }}/{{ file_name }}"
+    mode: 0644
+  notify: Restart Nginx
