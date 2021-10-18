@@ -30,6 +30,7 @@ To run this scripts you will need at least this:
     $ ssh-keygen -t rsa -b 4096 -N "" -f id_rsa_nginx
     $ ssh-keygen -t rsa -b 4096 -N "" -f id_rsa_bastion
     ```  
+*NOTE: don't forget to check permission to private files, they should be 0600 or 0400*
 
 3. In ```varibles.tf``` fill the path to SSH Private and Public keys
 4. In ```varibles.tf``` fill the path to your AWS keys
