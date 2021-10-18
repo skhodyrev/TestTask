@@ -1,0 +1,8 @@
+# Rename this file into terraform.tfvars
+# You can fill it up with other variables from variables.tf
+path_to_bastion_private_key = "id_rsa_bastion"
+path_to_bastion_public_key  = "id_rsa_bastion.pub"
+path_to_nginx_private_key   = "id_rsa_nginx"
+path_to_nginx_public_key    = "id_rsa_nginx.pub"
+path_to_aws_access_key      = "aws_cli_access.key"
+path_to_aws_secret_key      = "aws_cli_secret.key"
