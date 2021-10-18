@@ -30,17 +30,16 @@ To run this scripts you will need at least this:
     $ ssh-keygen -t rsa -b 4096 -N "" -f id_rsa_nginx
     $ ssh-keygen -t rsa -b 4096 -N "" -f id_rsa_bastion
     ```  
-*NOTE: don't forget to check permission to private files, they should be 0600 or 0400*
+*NOTE: don't forget to check permission to private key files, they should be 0600*
 
-3. In ```varibles.tf``` fill the path to SSH Private and Public keys
-4. In ```varibles.tf``` fill the path to your AWS keys
-5. Change number of VPC, if you need to
-6. Initialize and run
+3. In ```varibles.tf``` fill the path to SSH Private, SSH Public and AWS keys  
+*OR* rename ```terraform.tfvars.dummy``` into ```terraform.tfvars``` and fill this file
+4. Initialize and run
     ```
     $ terraform init
     $ terraform apply --auto-approve
     ```
-7. Test your infrastructure, with commands printed by ```output.tf```
+5. Test your infrastructure, with commands printed by ```output.tf```
 
 ## To do
  - [x] add README.MD
